@@ -12,4 +12,6 @@ public interface AttractionInfoMapper {
     List<AttractionInfo> selectByTitle(String searchTitle);
 
     AttractionInfo selectByContentID(String contentId);
+
+    void likeCountUp(String contentID);
 }

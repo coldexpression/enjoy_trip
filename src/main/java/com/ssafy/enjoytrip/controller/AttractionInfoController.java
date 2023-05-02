@@ -3,6 +3,7 @@ package com.ssafy.enjoytrip.controller;
 import com.ssafy.enjoytrip.dto.AttractionInfo;
 import com.ssafy.enjoytrip.model.service.AttractionInfoServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +31,11 @@ public class AttractionInfoController {
     @GetMapping("/{contentId}")
     public ResponseEntity<AttractionInfo> selectByContentID(@PathVariable String contentId) {
         return new ResponseEntity<>(attractionInfoService.selectByContentID(contentId), HttpStatus.OK);
+    }
+
+    @PostMapping("/{contentId}/likeUp")
+    public ResponseEntity<?> likeCountUp(@PathVariable String contentId){
+        attractionInfoService.likeCountUp(contentId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

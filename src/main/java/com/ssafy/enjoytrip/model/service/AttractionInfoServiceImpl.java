@@ -28,4 +28,9 @@ public class AttractionInfoServiceImpl implements AttractionInfoService {
     public AttractionInfo selectByContentID(String contentId) {
         return attractionInfoMapper.selectByContentID(contentId);
     }
+
+    @Override
+    public void likeCountUp(String contentId) {
+        attractionInfoMapper.likeCountUp(contentId);
+    }
 }

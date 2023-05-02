@@ -10,4 +10,6 @@ public interface AttractionInfoService {
     List<AttractionInfo> selectByTitle(String searchTitle);
 
     AttractionInfo selectByContentID(String contentId);
+
+    void likeCountUp(String contentId);
 }

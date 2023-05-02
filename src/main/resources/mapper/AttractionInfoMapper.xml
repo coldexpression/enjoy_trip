@@ -4,25 +4,23 @@
 
 <mapper namespace="com.ssafy.enjoytrip.model.mapper.AttractionInfoMapper">
     <select id="selectAll" resultType="AttractionInfo">
-        select
-            i.content_id content_id,
-            i.title titel,
-            i.addr1 addr1,
-            i.addr2 addr2,
-            i.first_image first_image,
-            i.first_image2 first_image2,
-            i.latitude latitude,
-            i.longitude longitude,
-            i.view_count view_count,
-            d.overview as overview
-        from
-            attraction_description d
-                inner join
-            attraction_info i
-            on
-                d.content_id = i.content_id
+        select i.content_id   content_id,
+               i.title        titel,
+               i.addr1        addr1,
+               i.addr2        addr2,
+               i.first_image  first_image,
+               i.first_image2 first_image2,
+               i.latitude     latitude,
+               i.longitude    longitude,
+               i.view_count   view_count,
+               d.overview as  overview
+        from attraction_description d
+                 inner join
+             attraction_info i
+             on
+                 d.content_id = i.content_id limit 100
     </select>
-    <select id="selectByTitle" parameterType="java.lang.String" resultType="AttractionInfo">
+    <select id="selectByTitle" parameterType="java.lang.String">
         select
             i.content_id content_id,
             i.title titel,
@@ -62,27 +60,12 @@
             on
                 d.content_id = i.content_id
         WHERE
-            content_id = #{contentId}
+            i.content_id = #{contentId}
     </select>
-    <select id="viewCountUp" parameterType="java.lang.String" resultType="AttractionInfo">
-        select
-            i.content_id content_id,
-            i.title titel,
-            i.addr1 addr1,
-            i.addr2 addr2,
-            i.first_image first_image,
-            i.first_image2 first_image2,
-            i.latitude latitude,
-            i.longitude longitude,
-            i.view_count view_count,
-            d.overview as overview
-        from
-            attraction_description d
-                inner join
-            attraction_info i
-            on
-                d.content_id = i.content_id
-        WHERE
-            content_id = #{contentId}
-    </select>
+    <update id="likeCountUp" parameterType="java.lang.String">
+        update attraction_info
+        set like_count = like_count + 1
+        WHERE content_id = #{contentId};
+
+    </update>
 </mapper>
