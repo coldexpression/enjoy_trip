@@ -9,6 +9,8 @@ import java.util.List;
 public interface AttractionInfoMapper {
     List<AttractionInfo> selectAll();
 
+    List<AttractionInfo> selectTop4();
+
     List<AttractionInfo> selectByTitle(String searchTitle);
 
     AttractionInfo selectByContentID(String contentId);

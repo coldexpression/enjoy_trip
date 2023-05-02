@@ -68,4 +68,26 @@
         WHERE content_id = #{contentId};
 
     </update>
+    <select resultType="AttractionInfo" id="selectTop4" >
+        select
+            i.content_id content_id,
+            i.title titel,
+            i.addr1 addr1,
+            i.addr2 addr2,
+            i.first_image first_image,
+            i.first_image2 first_image2,
+            i.latitude latitude,
+            i.longitude longitude,
+            i.readcount view_count,
+            d.overview as overview
+        from
+            attraction_description d
+                inner join
+            attraction_info i
+            on
+                d.content_id = i.content_id
+        where first_image != ""
+        order by readcount
+        limit 4
+    </select>
 </mapper>

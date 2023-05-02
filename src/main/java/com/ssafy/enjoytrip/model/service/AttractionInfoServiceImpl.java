@@ -19,6 +19,10 @@ public class AttractionInfoServiceImpl implements AttractionInfoService {
         return attractionInfoMapper.selectAll();
     }
 
+    public List<AttractionInfo> selectTop4()  {
+        return attractionInfoMapper.selectTop4();
+    }
+
     @Override
     public List<AttractionInfo> selectByTitle(String searchTitle) {
         return attractionInfoMapper.selectByTitle(searchTitle);

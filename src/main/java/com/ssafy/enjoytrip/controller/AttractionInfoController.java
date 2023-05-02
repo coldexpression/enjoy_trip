@@ -23,6 +23,11 @@ public class AttractionInfoController {
         return new ResponseEntity<>(attractionInfoService.selectAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/top4")
+    public ResponseEntity<List<AttractionInfo>> selectTop4() {
+        return new ResponseEntity<>(attractionInfoService.selectTop4(), HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<List<AttractionInfo>> selectByTitle(@RequestParam String searchTitle) {
         return new ResponseEntity<>(attractionInfoService.selectByTitle(searchTitle), HttpStatus.OK);
