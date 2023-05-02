@@ -5,7 +5,7 @@
 <mapper namespace="com.ssafy.enjoytrip.model.mapper.AttractionInfoMapper">
     <select id="selectAll" resultType="AttractionInfo">
         select i.content_id   content_id,
-               i.title        titel,
+               i.title        title,
                i.addr1        addr1,
                i.addr2        addr2,
                i.first_image  first_image,
@@ -23,7 +23,7 @@
     <select id="selectByTitle" parameterType="java.lang.String">
         select
             i.content_id content_id,
-            i.title titel,
+            i.title title,
             i.addr1 addr1,
             i.addr2 addr2,
             i.first_image first_image,
@@ -44,7 +44,7 @@
     <select id="selectByContentID" parameterType="java.lang.String" resultType="AttractionInfo">
         select
             i.content_id content_id,
-            i.title titel,
+            i.title title,
             i.addr1 addr1,
             i.addr2 addr2,
             i.first_image first_image,
@@ -71,7 +71,7 @@
     <select resultType="AttractionInfo" id="selectTop4" >
         select
             i.content_id content_id,
-            i.title titel,
+            i.title title,
             i.addr1 addr1,
             i.addr2 addr2,
             i.first_image first_image,
