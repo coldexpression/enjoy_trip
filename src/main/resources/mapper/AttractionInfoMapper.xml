@@ -91,7 +91,7 @@
             on
                 d.content_id = i.content_id
         where first_image != ""
-        order by i.readcount
-        limit 4
+        order by i.readcount desc
+            limit 4
     </select>
 </mapper>
