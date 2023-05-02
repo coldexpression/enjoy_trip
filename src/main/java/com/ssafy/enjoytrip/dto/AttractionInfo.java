@@ -16,6 +16,7 @@ public class AttractionInfo {
     private String first_image2;
     private double latitude;
     private double longitude;
-    private int view_count;
+    private int readcount;
+    private int like_count;
     private String overview;
 }

@@ -12,8 +12,9 @@
                i.first_image2 first_image2,
                i.latitude     latitude,
                i.longitude    longitude,
-               i.view_count   view_count,
-               d.overview as  overview
+               i.readcount readcount,
+               i.like_count like_count,
+               d.overview overview
         from attraction_description d
                  inner join
              attraction_info i
@@ -30,8 +31,9 @@
             i.first_image2 first_image2,
             i.latitude latitude,
             i.longitude longitude,
-            i.view_count view_count,
-            d.overview as overview
+            i.readcount readcount,
+            i.like_count like_count,
+            d.overview overview
         from
             attraction_description d
                 inner join
@@ -51,8 +53,9 @@
             i.first_image2 first_image2,
             i.latitude latitude,
             i.longitude longitude,
-            i.view_count view_count,
-            d.overview as overview
+            i.readcount readcount,
+            i.like_count like_count,
+            d.overview overview
         from
             attraction_description d
                 inner join
@@ -78,8 +81,9 @@
             i.first_image2 first_image2,
             i.latitude latitude,
             i.longitude longitude,
-            i.readcount view_count,
-            d.overview as overview
+            i.readcount readcount,
+            i.like_count like_count,
+            d.overview overview
         from
             attraction_description d
                 inner join
@@ -87,7 +91,7 @@
             on
                 d.content_id = i.content_id
         where first_image != ""
-        order by readcount
+        order by i.readcount
         limit 4
     </select>
 </mapper>
