@@ -4,38 +4,84 @@
 
 <mapper namespace="com.ssafy.enjoytrip.model.mapper.AttractionInfoMapper">
     <select id="selectAll" resultType="AttractionInfo">
-        SELECT
-            content_id
-        ,   title
-        ,   addr1
-        ,   first_image
-        ,   first_image2
-        FROM
-            attraction_info
+        select
+            i.content_id content_id,
+            i.title titel,
+            i.addr1 addr1,
+            i.addr2 addr2,
+            i.first_image first_image,
+            i.first_image2 first_image2,
+            i.latitude latitude,
+            i.longitude longitude,
+            i.view_count view_count,
+            d.overview as overview
+        from
+            attraction_description d
+                inner join
+            attraction_info i
+            on
+                d.content_id = i.content_id
     </select>
     <select id="selectByTitle" parameterType="java.lang.String" resultType="AttractionInfo">
-        SELECT
-            content_id
-        ,   title
-        ,   addr1
-        ,   first_image
-        ,   first_image2
-        FROM
-            attraction_info
+        select
+            i.content_id content_id,
+            i.title titel,
+            i.addr1 addr1,
+            i.addr2 addr2,
+            i.first_image first_image,
+            i.first_image2 first_image2,
+            i.latitude latitude,
+            i.longitude longitude,
+            i.view_count view_count,
+            d.overview as overview
+        from
+            attraction_description d
+                inner join
+            attraction_info i
+            on
+                d.content_id = i.content_id
         WHERE
-            title LIKE CONCAT('%',#{searchTitle},'%')
+            addr1 LIKE CONCAT('%',#{searchTitle},'%')
     </select>
     <select id="selectByContentID" parameterType="java.lang.String" resultType="AttractionInfo">
-        SELECT
-            content_id
-        ,   title
-        ,   addr1
-        ,   first_image
-        ,   first_image2
-        ,   latitude
-        ,   longitude
-        FROM
-            attraction_info
+        select
+            i.content_id content_id,
+            i.title titel,
+            i.addr1 addr1,
+            i.addr2 addr2,
+            i.first_image first_image,
+            i.first_image2 first_image2,
+            i.latitude latitude,
+            i.longitude longitude,
+            i.view_count view_count,
+            d.overview as overview
+        from
+            attraction_description d
+                inner join
+            attraction_info i
+            on
+                d.content_id = i.content_id
+        WHERE
+            content_id = #{contentId}
+    </select>
+    <select id="viewCountUp" parameterType="java.lang.String" resultType="AttractionInfo">
+        select
+            i.content_id content_id,
+            i.title titel,
+            i.addr1 addr1,
+            i.addr2 addr2,
+            i.first_image first_image,
+            i.first_image2 first_image2,
+            i.latitude latitude,
+            i.longitude longitude,
+            i.view_count view_count,
+            d.overview as overview
+        from
+            attraction_description d
+                inner join
+            attraction_info i
+            on
+                d.content_id = i.content_id
         WHERE
             content_id = #{contentId}
     </select>

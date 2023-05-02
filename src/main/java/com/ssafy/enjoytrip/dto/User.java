@@ -11,4 +11,5 @@ public class User {
     private String pwd;
     private String email;
     private boolean advertisement;
+
 }
