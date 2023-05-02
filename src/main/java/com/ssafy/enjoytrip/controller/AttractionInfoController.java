@@ -39,8 +39,13 @@ public class AttractionInfoController {
     }
 
     @PostMapping("/{contentId}/likeUp")
-    public ResponseEntity<?> likeCountUp(@PathVariable String contentId){
-        attractionInfoService.likeCountUp(contentId);
+    public ResponseEntity<?> likeCountUp(@PathVariable String contentId, @RequestParam String user_id, @RequestParam String name){
+        attractionInfoService.likeCountUp(contentId, user_id, name );
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("/{contentId}/likeDown")
+    public ResponseEntity<?> likeCountDown(@PathVariable String contentId, @RequestParam String user_id){
+        attractionInfoService.likeCountDown(contentId, user_id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

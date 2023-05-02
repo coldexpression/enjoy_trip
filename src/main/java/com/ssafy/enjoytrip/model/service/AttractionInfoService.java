@@ -13,5 +13,7 @@ public interface AttractionInfoService {
 
     AttractionInfo selectByContentID(String contentId);
 
-    void likeCountUp(String contentId);
+    void likeCountUp(String contentId, String user_id, String name);
+
+    void likeCountDown(String contentId, String user_id);
 }

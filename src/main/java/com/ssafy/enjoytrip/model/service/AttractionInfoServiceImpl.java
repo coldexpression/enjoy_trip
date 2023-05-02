@@ -5,7 +5,9 @@ import com.ssafy.enjoytrip.model.mapper.AttractionInfoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +36,20 @@ public class AttractionInfoServiceImpl implements AttractionInfoService {
     }
 
     @Override
-    public void likeCountUp(String contentId) {
+    public void likeCountUp(String contentId, String user_id, String name) {
         attractionInfoMapper.likeCountUp(contentId);
+        Map<String, String> favoriteInfo = new HashMap<String, String>();
+        favoriteInfo.put("contentId", contentId);
+        favoriteInfo.put("user_id", user_id);
+        favoriteInfo.put("name", name);
+        attractionInfoMapper.favoriteInsert(favoriteInfo);
+    }
+    @Override
+    public void likeCountDown(String contentId, String user_id) {
+        attractionInfoMapper.likeCountDown(contentId);
+        Map<String, String> favoriteInfo = new HashMap<String, String>();
+        favoriteInfo.put("contentId", contentId);
+        favoriteInfo.put("user_id", user_id);
+        attractionInfoMapper.favoriteDelete(favoriteInfo);
     }
 }
