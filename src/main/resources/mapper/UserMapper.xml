@@ -12,11 +12,11 @@
             USER
         WHERE
             ID = #{id}
-        AND PASSWORD = #{password}
+        AND PASSWORD = #{pwd}
     </select>
     <insert id="signin" parameterType="User">
         INSERT INTO USER (ID, PASSWORD, EMAIL, ADVERTISEMENT)
-        VALUES (#{id}, #{password}, #{email}, #{advertisemnt})
+        VALUES (#{id}, #{pwd}, #{email}, #{advertisemnt})
     </insert>
     <select id="check" parameterType="User" resultType="User">
         SELECT
@@ -33,10 +33,11 @@
             USER
         SET
             EMAIL = #{email}
-        ,   PASSWORD = #{password}
+        ,   PASSWORD = #{newPwd}
         ,   ADVERTISEMENT = #{advertisement}
         WHERE
             ID = #{id}
+        AND PASSWORD = #{pwd}
     </update>
     <delete id="delete" parameterType="User">
         DELETE FROM USER

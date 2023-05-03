@@ -3,9 +3,11 @@ package com.ssafy.enjoytrip.model.service;
 import com.ssafy.enjoytrip.dto.User;
 import com.ssafy.enjoytrip.model.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
     private final UserMapper userMapper;

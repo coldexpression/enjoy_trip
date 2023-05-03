@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(originPatterns = {"http://localhost:5500", "http://127.0.0.1:5500"})
+@CrossOrigin(originPatterns = {"http://localhost:8080", "http://127.0.0.1:8080"})
 @RequestMapping("/user")
 public class UserController {
 
@@ -17,7 +17,9 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody User user) {
-        return new ResponseEntity<>(userService.login(user), HttpStatus.OK);
+        User resultUser = userService.login(user);
+        if (resultUser == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(resultUser, HttpStatus.OK);
     }
 
     @PostMapping
@@ -31,12 +33,14 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<Boolean> update(User user) {
-        return new ResponseEntity<>(userService.update(user), HttpStatus.OK);
+    public ResponseEntity<Boolean> update(@RequestBody User user) {
+        boolean result = userService.update(user);
+        if (!result) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping
-    public ResponseEntity<Boolean> delete(User user) {
+    public ResponseEntity<Boolean> delete(@RequestBody User user) {
         return new ResponseEntity<>(userService.delete(user), HttpStatus.OK);
     }
 }
