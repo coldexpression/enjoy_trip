@@ -37,6 +37,11 @@ public class AttractionInfoServiceImpl implements AttractionInfoService {
     }
 
     @Override
+    public List<AttractionInfo> userFavoriteList(String user_id){
+        return attractionInfoMapper.userFavoriteList(user_id);
+    }
+
+    @Override
     public void likeCountUp(String contentId, String user_id, String name) {
         attractionInfoMapper.likeCountUp(contentId);
         Map<String, String> favoriteInfo = new HashMap<String, String>();

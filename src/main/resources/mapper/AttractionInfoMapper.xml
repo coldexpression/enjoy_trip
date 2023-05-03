@@ -98,4 +98,34 @@
         WHERE content_id = #{contentId};
 
     </update>
+    <insert id="favoriteInsert" parameterType="Map">
+        insert into favorite values (#{user_id},#{contentId},#{name});
+    </insert>
+    <update id="likeCountDown" parameterType="java.lang.String">
+        update attraction_info
+        set like_count = like_count - 1
+        WHERE content_id = #{contentId} and like_count>0;
+    </update>
+    <delete id="favoriteDelete" parameterType="Map">
+        delete from favorite where user_id = #{user_id} and content_id = #{contentId};
+    </delete>
+    <select id="userFavoriteList" resultType="AttractionInfo" parameterType="String">
+        select i.content_id   content_id,
+               i.title        title,
+               i.addr1        addr1,
+               i.addr2        addr2,
+               i.first_image  first_image,
+               i.first_image2 first_image2,
+               i.latitude     latitude,
+               i.longitude    longitude,
+               i.readcount readcount,
+               i.like_count like_count,
+               d.overview overview
+        from attraction_description d
+                 inner join
+             attraction_info i
+             on
+                 d.content_id = i.content_id
+        where i.content_id in (select content_id from favorite where user_id=#{user_id})
+    </select>
 </mapper>
