@@ -32,6 +32,7 @@ public class AttractionInfoServiceImpl implements AttractionInfoService {
 
     @Override
     public AttractionInfo selectByContentID(String contentId) {
+        attractionInfoMapper.readCountUp(contentId);
         return attractionInfoMapper.selectByContentID(contentId);
     }
 

@@ -16,6 +16,8 @@ public interface AttractionInfoMapper {
 
     AttractionInfo selectByContentID(String contentId);
 
+    void readCountUp(String contentId);
+
     void likeCountUp(String contentId);
 
     void likeCountDown(String contentId);

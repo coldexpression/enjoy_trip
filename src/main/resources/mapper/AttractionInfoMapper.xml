@@ -21,6 +21,27 @@
              on
                  d.content_id = i.content_id limit 100
     </select>
+    <select id="selectTop4" resultType="AttractionInfo">
+        select i.content_id   content_id,
+               i.title        title,
+               i.addr1        addr1,
+               i.addr2        addr2,
+               i.first_image  first_image,
+               i.first_image2 first_image2,
+               i.latitude     latitude,
+               i.longitude    longitude,
+               i.readcount readcount,
+               i.like_count like_count,
+               d.overview overview
+        from attraction_description d
+                 inner join
+             attraction_info i
+             on
+                 d.content_id = i.content_id
+        where first_image != ""
+        order by i.readcount desc
+        limit 4;
+    </select>
     <select id="selectByTitle" parameterType="java.lang.String">
         select
             i.content_id content_id,
@@ -65,6 +86,12 @@
         WHERE
             i.content_id = #{contentId}
     </select>
+    <update id="readCountUp" parameterType="java.lang.String">
+        update attraction_info
+        set readcount = readcount + 1
+        WHERE content_id = #{contentId};
+
+    </update>
     <update id="likeCountUp" parameterType="java.lang.String">
         update attraction_info
         set like_count = like_count + 1
