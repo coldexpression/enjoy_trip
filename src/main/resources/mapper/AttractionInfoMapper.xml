@@ -4,128 +4,152 @@
 
 <mapper namespace="com.ssafy.enjoytrip.model.mapper.AttractionInfoMapper">
     <select id="selectAll" resultType="AttractionInfo">
-        select i.content_id   content_id,
-               i.title        title,
-               i.addr1        addr1,
-               i.addr2        addr2,
-               i.first_image  first_image,
-               i.first_image2 first_image2,
-               i.latitude     latitude,
-               i.longitude    longitude,
-               i.readcount readcount,
-               i.like_count like_count,
-               d.overview overview
-        from attraction_description d
+        select ai.content_id   content_id,
+               ai.title        title,
+               ai.addr1        addr1,
+               ai.addr2        addr2,
+               ai.first_image  first_image,
+               ai.first_image2 first_image2,
+               ai.latitude     latitude,
+               ai.longitude    longitude,
+               ai.readcount readcount,
+               ai.like_count like_count,
+               ad.overview overview
+        from attraction_description ad
                  inner join
-             attraction_info i
+             attraction_info ai
              on
-                 d.content_id = i.content_id limit 100
+                 ad.content_id = ai.content_id limit 100
     </select>
     <select id="selectTop4" resultType="AttractionInfo">
-        select i.content_id   content_id,
-               i.title        title,
-               i.addr1        addr1,
-               i.addr2        addr2,
-               i.first_image  first_image,
-               i.first_image2 first_image2,
-               i.latitude     latitude,
-               i.longitude    longitude,
-               i.readcount readcount,
-               i.like_count like_count,
-               d.overview overview
-        from attraction_description d
+        select ai.content_id   content_id,
+               ai.title        title,
+               ai.addr1        addr1,
+               ai.addr2        addr2,
+               ai.first_image  first_image,
+               ai.first_image2 first_image2,
+               ai.latitude     latitude,
+               ai.longitude    longitude,
+               ai.readcount readcount,
+               ai.like_count like_count,
+               ad.overview overview
+        from attraction_description ad
                  inner join
-             attraction_info i
+             attraction_info ai
              on
-                 d.content_id = i.content_id
+                 ai.content_id = ad.content_id
         where first_image != ""
-        order by i.readcount desc
+        order by ai.readcount desc
         limit 4;
     </select>
-    <select id="selectByTitle" parameterType="java.lang.String">
+    <select id="selectByTitle" parameterType="java.lang.String" resultType="AttractionInfo">
         select
-            i.content_id content_id,
-            i.title title,
-            i.addr1 addr1,
-            i.addr2 addr2,
-            i.first_image first_image,
-            i.first_image2 first_image2,
-            i.latitude latitude,
-            i.longitude longitude,
-            i.readcount readcount,
-            i.like_count like_count,
-            d.overview overview
+            ai.content_id content_id,
+            ai.title title,
+            ai.addr1 addr1,
+            ai.addr2 addr2,
+            ai.first_image first_image,
+            ai.first_image2 first_image2,
+            ai.latitude latitude,
+            ai.longitude longitude,
+            ai.readcount readcount,
+            ai.like_count like_count,
+            ad.overview overview
         from
-            attraction_description d
+            attraction_description ad
                 inner join
-            attraction_info i
+            attraction_info ai
             on
-                d.content_id = i.content_id
+                ad.content_id = ai.content_id
         WHERE
-            addr1 LIKE CONCAT('%',#{searchTitle},'%')
+            addr1 LIKE CONCAT('%',#{search_title},'%')
+            limit 100
+    </select>
+    <select id="selectBySidoCode" parameterType="java.lang.String" resultType="AttractionInfo">
+        select
+            ai.content_id content_id,
+            ai.title title,
+            ai.addr1 addr1,
+            ai.addr2 addr2,
+            ai.first_image first_image,
+            ai.first_image2 first_image2,
+            ai.latitude latitude,
+            ai.longitude longitude,
+            ai.readcount readcount,
+            ai.like_count like_count,
+            ad.overview overview
+        from
+            attraction_description ad
+                inner join
+            attraction_info ai
+            on
+                ad.content_id = ai.content_id
+        WHERE
+            ai.sido_code = #{sido_code}
+            limit 100
     </select>
     <select id="selectByContentID" parameterType="java.lang.String" resultType="AttractionInfo">
         select
-            i.content_id content_id,
-            i.title title,
-            i.addr1 addr1,
-            i.addr2 addr2,
-            i.first_image first_image,
-            i.first_image2 first_image2,
-            i.latitude latitude,
-            i.longitude longitude,
-            i.readcount readcount,
-            i.like_count like_count,
-            d.overview overview
+            ai.content_id content_id,
+            ai.title title,
+            ai.addr1 addr1,
+            ai.addr2 addr2,
+            ai.first_image first_image,
+            ai.first_image2 first_image2,
+            ai.latitude latitude,
+            ai.longitude longitude,
+            ai.readcount readcount,
+            ai.like_count like_count,
+            ad.overview overview
         from
-            attraction_description d
+            attraction_description ad
                 inner join
-            attraction_info i
+            attraction_info ai
             on
-                d.content_id = i.content_id
+                ad.content_id = ai.content_id
         WHERE
-            i.content_id = #{contentId}
+            ai.content_id = #{content_id}
     </select>
     <update id="readCountUp" parameterType="java.lang.String">
         update attraction_info
         set readcount = readcount + 1
-        WHERE content_id = #{contentId};
+        WHERE content_id = #{content_id};
 
     </update>
     <update id="likeCountUp" parameterType="java.lang.String">
         update attraction_info
         set like_count = like_count + 1
-        WHERE content_id = #{contentId};
+        WHERE content_id = #{content_id};
 
     </update>
     <insert id="favoriteInsert" parameterType="Map">
-        insert into favorite values (#{user_id},#{contentId},#{name});
+        insert into favorite values (#{user_id},#{content_id},#{name});
     </insert>
     <update id="likeCountDown" parameterType="java.lang.String">
         update attraction_info
         set like_count = like_count - 1
-        WHERE content_id = #{contentId} and like_count>0;
+        WHERE content_id = #{content_id} and like_count>0;
     </update>
     <delete id="favoriteDelete" parameterType="Map">
-        delete from favorite where user_id = #{user_id} and content_id = #{contentId};
+        delete from favorite where user_id = #{user_id} and content_id = #{content_id};
     </delete>
     <select id="userFavoriteList" resultType="AttractionInfo" parameterType="String">
-        select i.content_id   content_id,
-               i.title        title,
-               i.addr1        addr1,
-               i.addr2        addr2,
-               i.first_image  first_image,
-               i.first_image2 first_image2,
-               i.latitude     latitude,
-               i.longitude    longitude,
-               i.readcount readcount,
-               i.like_count like_count,
-               d.overview overview
-        from attraction_description d
+        select ai.content_id   content_id,
+               ai.title        title,
+               ai.addr1        addr1,
+               ai.addr2        addr2,
+               ai.first_image  first_image,
+               ai.first_image2 first_image2,
+               ai.latitude     latitude,
+               ai.longitude    longitude,
+               ai.readcount readcount,
+               ai.like_count like_count,
+               ad.overview overview
+        from attraction_description ad
                  inner join
-             attraction_info i
+             attraction_info ai
              on
-                 d.content_id = i.content_id
-        where i.content_id in (select content_id from favorite where user_id=#{user_id})
+                 ad.content_id = ai.content_id
+        where ai.content_id in (select content_id from favorite where user_id=#{user_id})
     </select>
 </mapper>

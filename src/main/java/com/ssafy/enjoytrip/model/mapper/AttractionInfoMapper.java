@@ -12,17 +12,19 @@ public interface AttractionInfoMapper {
 
     List<AttractionInfo> selectTop4();
 
-    List<AttractionInfo> selectByTitle(String searchTitle);
+    List<AttractionInfo> selectByTitle(String search_title);
 
-    AttractionInfo selectByContentID(String contentId);
+    List<AttractionInfo> selectBySidoCode(String sido_code);
 
-    void readCountUp(String contentId);
+    AttractionInfo selectByContentID(String content_id);
+
+    void readCountUp(String content_id);
 
     List<AttractionInfo> userFavoriteList(String user_id);
 
-    void likeCountUp(String contentId);
+    void likeCountUp(String content_id);
 
-    void likeCountDown(String contentId);
+    void likeCountDown(String content_id);
     void favoriteInsert(Map<String, String> favoriteInfo);
 
     void favoriteDelete(Map<String, String> favoriteInfo);
