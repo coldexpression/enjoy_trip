@@ -8,15 +8,15 @@ import lombok.*;
 @NoArgsConstructor
 public class AttractionInfo {
 
-    private String content_id;
+    private String contentId;
     private String title;
     private String addr1;
     private String addr2;
-    private String first_image;
-    private String first_image2;
+    private String firstImage;
+    private String firstImage2;
     private double latitude;
     private double longitude;
-    private int readcount;
-    private int like_count;
+    private int readCount;
+    private int likeCount;
     private String overview;
 }

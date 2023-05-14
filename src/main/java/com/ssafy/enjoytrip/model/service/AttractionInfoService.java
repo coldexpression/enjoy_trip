@@ -13,12 +13,12 @@ public interface AttractionInfoService {
 
     List<AttractionInfo> selectBySidoCode(String sido_code);
 
-    AttractionInfo selectByContentID(String content_id);
+    AttractionInfo selectByContentID(String contentId);
 
     List<AttractionInfo> userFavoriteList(String user_id);
 
-    void likeCountUp(String content_id, String user_id, String name);
+    void likeCountUp(String contentId, String user_id, String name);
 
-    void likeCountDown(String content_id, String user_id);
+    void likeCountDown(String contentId, String user_id);
 
 }

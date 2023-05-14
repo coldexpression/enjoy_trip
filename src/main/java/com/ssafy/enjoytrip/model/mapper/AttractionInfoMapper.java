@@ -16,15 +16,15 @@ public interface AttractionInfoMapper {
 
     List<AttractionInfo> selectBySidoCode(String sido_code);
 
-    AttractionInfo selectByContentID(String content_id);
+    AttractionInfo selectByContentID(String contentId);
 
-    void readCountUp(String content_id);
+    void readCountUp(String contentId);
 
     List<AttractionInfo> userFavoriteList(String user_id);
 
-    void likeCountUp(String content_id);
+    void likeCountUp(String contentId);
 
-    void likeCountDown(String content_id);
+    void likeCountDown(String contentId);
     void favoriteInsert(Map<String, String> favoriteInfo);
 
     void favoriteDelete(Map<String, String> favoriteInfo);

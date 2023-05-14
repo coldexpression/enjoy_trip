@@ -40,9 +40,9 @@ public class AttractionInfoController {
         return new ResponseEntity<>(attractionInfoService.selectBySidoCode(sido_code), HttpStatus.OK);
     }
 
-    @GetMapping("/{content_id}")
-    public ResponseEntity<AttractionInfo> selectByContentID(@PathVariable String content_id) {
-        return new ResponseEntity<>(attractionInfoService.selectByContentID(content_id), HttpStatus.OK);
+    @GetMapping("/{contentId}")
+    public ResponseEntity<AttractionInfo> selectByContentID(@PathVariable String contentId) {
+        return new ResponseEntity<>(attractionInfoService.selectByContentID(contentId), HttpStatus.OK);
     }
 
     @GetMapping("/userFavorite")
@@ -51,14 +51,14 @@ public class AttractionInfoController {
     }
 
 
-    @PostMapping("/{content_id}/likeUp")
-    public ResponseEntity<?> likeCountUp(@PathVariable String content_id, @RequestParam String user_id, @RequestParam String name){
-        attractionInfoService.likeCountUp(content_id, user_id, name );
+    @PostMapping("/{contentId}/likeUp")
+    public ResponseEntity<?> likeCountUp(@PathVariable String contentId, @RequestParam String user_id, @RequestParam String name){
+        attractionInfoService.likeCountUp(contentId, user_id, name );
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @PostMapping("/{content_id}/likeDown")
-    public ResponseEntity<?> likeCountDown(@PathVariable String content_id, @RequestParam String user_id){
-        attractionInfoService.likeCountDown(content_id, user_id);
+    @PostMapping("/{contentId}/likeDown")
+    public ResponseEntity<?> likeCountDown(@PathVariable String contentId, @RequestParam String user_id){
+        attractionInfoService.likeCountDown(contentId, user_id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
