@@ -29,15 +29,15 @@ public class AttractionInfoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AttractionInfo>> selectByTitle(@RequestParam String search_title) {
-        System.out.println(search_title);
-        return new ResponseEntity<>(attractionInfoService.selectByTitle(search_title), HttpStatus.OK);
+    public ResponseEntity<List<AttractionInfo>> selectByTitle(@RequestParam String searchTitle) {
+        System.out.println(searchTitle);
+        return new ResponseEntity<>(attractionInfoService.selectByTitle(searchTitle), HttpStatus.OK);
     }
 
-    @GetMapping("/list/{sido_code}")
-    public ResponseEntity<List<AttractionInfo>> selectBySidoCode(@PathVariable String sido_code) {
-        System.out.println(sido_code);
-        return new ResponseEntity<>(attractionInfoService.selectBySidoCode(sido_code), HttpStatus.OK);
+    @GetMapping("/list/{sidoCode}")
+    public ResponseEntity<List<AttractionInfo>> selectBySidoCode(@PathVariable String sidoCode) {
+        System.out.println(sidoCode);
+        return new ResponseEntity<>(attractionInfoService.selectBySidoCode(sidoCode), HttpStatus.OK);
     }
 
     @GetMapping("/{contentId}")
@@ -46,19 +46,19 @@ public class AttractionInfoController {
     }
 
     @GetMapping("/userFavorite")
-    public ResponseEntity<List<AttractionInfo>> userFavoriteList(@RequestParam String user_id) {
-        return new ResponseEntity<>(attractionInfoService.userFavoriteList(user_id), HttpStatus.OK);
+    public ResponseEntity<List<AttractionInfo>> userFavoriteList(@RequestParam String userId) {
+        return new ResponseEntity<>(attractionInfoService.userFavoriteList(userId), HttpStatus.OK);
     }
 
 
     @PostMapping("/{contentId}/likeUp")
-    public ResponseEntity<?> likeCountUp(@PathVariable String contentId, @RequestParam String user_id, @RequestParam String name){
-        attractionInfoService.likeCountUp(contentId, user_id, name );
+    public ResponseEntity<?> likeCountUp(@PathVariable String contentId, @RequestParam String userId, @RequestParam String name){
+        attractionInfoService.likeCountUp(contentId, userId, name );
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PostMapping("/{contentId}/likeDown")
-    public ResponseEntity<?> likeCountDown(@PathVariable String contentId, @RequestParam String user_id){
-        attractionInfoService.likeCountDown(contentId, user_id);
+    public ResponseEntity<?> likeCountDown(@PathVariable String contentId, @RequestParam String userId){
+        attractionInfoService.likeCountDown(contentId, userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
