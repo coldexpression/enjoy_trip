@@ -5,18 +5,18 @@
 <mapper namespace="com.ssafy.enjoytrip.model.mapper.UserMapper">
     <select id="login" parameterType="User" resultType="User">
         SELECT
-            id
-        ,   email
-        ,   advertisement
+            ID
+        ,   EMAIL
+        ,   ADVERTISEMENT
         FROM
             USER
         WHERE
             ID = #{id}
         AND PASSWORD = #{pwd}
     </select>
-    <insert id="signin" parameterType="User">
+    <insert id="signUp" parameterType="User">
         INSERT INTO USER (ID, PASSWORD, EMAIL, ADVERTISEMENT)
-        VALUES (#{id}, #{pwd}, #{email}, #{advertisemnt})
+        VALUES (#{id}, #{pwd}, #{email}, #{advertisement})
     </insert>
     <select id="check" parameterType="User" resultType="User">
         SELECT
@@ -44,4 +44,16 @@
         WHERE
             ID = #{id}
     </delete>
+
+    <select id="findUserById" parameterType="java.lang.String" resultType="User">
+        SELECT
+            ID  AS  ID
+        ,   PASSWORD    AS  PWD
+        ,   EMAIL   AS  EMAIL
+        ,   ADVERTISEMENT   AS  ADVERTISEMENT
+        FROM
+            USER
+        WHERE
+            ID = #{id}
+    </select>
 </mapper>
