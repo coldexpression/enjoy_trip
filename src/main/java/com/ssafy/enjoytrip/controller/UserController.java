@@ -54,13 +54,28 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<Boolean> update(@RequestBody User user) {
+        User resultUser = userService.login(user);
+        if (resultUser == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        if (!passwordEncoder.matches(user.getPassword(), resultUser.getPassword())) {
+            throw new IllegalArgumentException("잘못된 비밀번호 입니다.");
+        }
+
+
+        user.setNewPwd(passwordEncoder.encode(user.getNewPwd()));
         boolean result = userService.update(user);
         if (!result) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping
+    @PostMapping
     public ResponseEntity<Boolean> delete(@RequestBody User user) {
+        User resultUser = userService.login(user);
+        if (resultUser == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        log.debug("입력 비밀번호 : {}", user.getPassword());
+        log.debug("DB 비밀번호 : {}", resultUser.getPassword());
+        if (!passwordEncoder.matches(user.getPassword(), resultUser.getPassword()))
+            throw new IllegalArgumentException("잘못된 비밀번호 입니다.");
         return new ResponseEntity<>(userService.delete(user), HttpStatus.OK);
     }
 }

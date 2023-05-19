@@ -37,7 +37,6 @@
         ,   ADVERTISEMENT = #{advertisement}
         WHERE
             ID = #{id}
-        AND PASSWORD = #{pwd}
     </update>
     <delete id="delete" parameterType="User">
         DELETE FROM USER
