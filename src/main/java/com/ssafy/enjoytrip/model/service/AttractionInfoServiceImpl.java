@@ -26,41 +26,41 @@ public class AttractionInfoServiceImpl implements AttractionInfoService {
     }
 
     @Override
-    public List<AttractionInfo> selectByTitle(String search_title) {
-        return attractionInfoMapper.selectByTitle(search_title);
+    public List<AttractionInfo> selectByTitle(String searchTitle) {
+        return attractionInfoMapper.selectByTitle(searchTitle);
     }
 
     @Override
-    public List<AttractionInfo> selectBySidoCode(String sido_code) {
-        return attractionInfoMapper.selectBySidoCode(sido_code);
+    public List<AttractionInfo> selectBySidoCode(String sidoCode) {
+        return attractionInfoMapper.selectBySidoCode(sidoCode);
     }
 
     @Override
-    public AttractionInfo selectByContentID(String content_id) {
-        attractionInfoMapper.readCountUp(content_id);
-        return attractionInfoMapper.selectByContentID(content_id);
+    public AttractionInfo selectByContentID(String contentId) {
+        attractionInfoMapper.readCountUp(contentId);
+        return attractionInfoMapper.selectByContentID(contentId);
     }
 
     @Override
-    public List<AttractionInfo> userFavoriteList(String user_id){
-        return attractionInfoMapper.userFavoriteList(user_id);
+    public List<AttractionInfo> userFavoriteList(String userId){
+        return attractionInfoMapper.userFavoriteList(userId);
     }
 
     @Override
-    public void likeCountUp(String content_id, String user_id, String name) {
-        attractionInfoMapper.likeCountUp(content_id);
-        Map<String, String> favorite_info = new HashMap<String, String>();
-        favorite_info.put("content_id", content_id);
-        favorite_info.put("user_id", user_id);
-        favorite_info.put("name", name);
-        attractionInfoMapper.favoriteInsert(favorite_info);
+    public void likeCountUp(String contentId, String userId, String name) {
+        attractionInfoMapper.likeCountUp(contentId);
+        Map<String, String> favoriteInfo = new HashMap<String, String>();
+        favoriteInfo.put("contentId", contentId);
+        favoriteInfo.put("userId", userId);
+        favoriteInfo.put("name", name);
+        attractionInfoMapper.favoriteInsert(favoriteInfo);
     }
     @Override
-    public void likeCountDown(String content_id, String user_id) {
-        attractionInfoMapper.likeCountDown(content_id);
-        Map<String, String> favorite_info = new HashMap<String, String>();
-        favorite_info.put("content_id", content_id);
-        favorite_info.put("user_id", user_id);
-        attractionInfoMapper.favoriteDelete(favorite_info);
+    public void likeCountDown(String contentId, String userId) {
+        attractionInfoMapper.likeCountDown(contentId);
+        Map<String, String> favoriteInfo = new HashMap<String, String>();
+        favoriteInfo.put("contentId", contentId);
+        favoriteInfo.put("userId", userId);
+        attractionInfoMapper.favoriteDelete(favoriteInfo);
     }
 }

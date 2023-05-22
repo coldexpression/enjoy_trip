@@ -10,17 +10,19 @@ import java.util.Map;
 public interface AttractionInfoMapper {
     List<AttractionInfo> selectAll();
 
+    List<AttractionInfo> selectAllB();
+
     List<AttractionInfo> selectTop4();
 
-    List<AttractionInfo> selectByTitle(String search_title);
+    List<AttractionInfo> selectByTitle(String searchTitle);
 
-    List<AttractionInfo> selectBySidoCode(String sido_code);
+    List<AttractionInfo> selectBySidoCode(String sidoCode);
 
     AttractionInfo selectByContentID(String contentId);
 
     void readCountUp(String contentId);
 
-    List<AttractionInfo> userFavoriteList(String user_id);
+    List<AttractionInfo> userFavoriteList(String userId);
 
     void likeCountUp(String contentId);
 

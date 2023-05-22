@@ -21,6 +21,24 @@
              on
                  ad.content_id = ai.content_id limit 100
     </select>
+    <select id="selectAllB" resultType="AttractionInfo">
+        select ai.content_id   contentId,
+               ai.title        title,
+               ai.addr1        addr1,
+               ai.addr2        addr2,
+               ai.first_image  firstImage,
+               ai.first_image2 firstImage2,
+               ai.latitude     latitude,
+               ai.longitude    longitude,
+               ai.readcount readCount,
+               ai.like_count likeCount,
+               ad.overview overview
+        from attraction_description ad
+                 inner join
+             attraction_info ai
+             on
+                 ad.content_id = ai.content_id limit 100
+    </select>
     <select id="selectTop4" resultType="AttractionInfo">
         select ai.content_id   contentId,
                ai.title        title,

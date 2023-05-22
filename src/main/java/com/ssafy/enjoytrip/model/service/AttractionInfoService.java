@@ -9,16 +9,16 @@ public interface AttractionInfoService {
 
     List<AttractionInfo> selectTop4();
 
-    List<AttractionInfo> selectByTitle(String search_title);
+    List<AttractionInfo> selectByTitle(String searchTitle);
 
-    List<AttractionInfo> selectBySidoCode(String sido_code);
+    List<AttractionInfo> selectBySidoCode(String sidoCode);
 
     AttractionInfo selectByContentID(String contentId);
 
-    List<AttractionInfo> userFavoriteList(String user_id);
+    List<AttractionInfo> userFavoriteList(String userId);
 
-    void likeCountUp(String contentId, String user_id, String name);
+    void likeCountUp(String contentId, String userId, String name);
 
-    void likeCountDown(String contentId, String user_id);
+    void likeCountDown(String contentId, String userId);
 
 }
