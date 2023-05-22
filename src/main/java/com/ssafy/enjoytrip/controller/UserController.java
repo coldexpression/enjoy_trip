@@ -5,6 +5,7 @@ import com.ssafy.enjoytrip.model.service.UserServiceImpl;
 import com.ssafy.enjoytrip.util.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 
 @RestController
@@ -44,7 +47,13 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<Boolean> signUp(@RequestBody User user) {
         user.setPwd(passwordEncoder.encode(user.getPassword()));
-        return new ResponseEntity<>(userService.signUp(user), HttpStatus.OK);
+        try {
+            userService.signUp(user);
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch (DataIntegrityViolationException e) {
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+//        return new ResponseEntity<>(userService.signUp(user), HttpStatus.OK);
     }
 
     @PostMapping("/check")
