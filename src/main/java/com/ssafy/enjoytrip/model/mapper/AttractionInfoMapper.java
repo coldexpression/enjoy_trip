@@ -20,7 +20,7 @@ public interface AttractionInfoMapper {
 
     void readCountUp(String contentId);
 
-    List<AttractionInfo> userFavoriteList(String user_id);
+    List<AttractionInfo> userFavoriteList(String userId);
 
     void likeCountUp(String contentId);
 

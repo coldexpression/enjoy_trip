@@ -61,7 +61,7 @@
             on
                 ad.content_id = ai.content_id
         WHERE
-            addr1 LIKE CONCAT('%',#{search_title},'%')
+            addr1 LIKE CONCAT('%',#{searchTitle},'%')
             limit 100
     </select>
     <select id="selectBySidoCode" parameterType="java.lang.String" resultType="AttractionInfo">

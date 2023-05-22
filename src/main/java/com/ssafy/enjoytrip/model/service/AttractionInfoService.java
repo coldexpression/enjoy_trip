@@ -15,10 +15,10 @@ public interface AttractionInfoService {
 
     AttractionInfo selectByContentID(String contentId);
 
-    List<AttractionInfo> userFavoriteList(String user_id);
+    List<AttractionInfo> userFavoriteList();
 
-    void likeCountUp(String contentId, String user_id, String name);
+    void likeCountUp(String contentId, String name);
 
-    void likeCountDown(String contentId, String user_id);
+    void likeCountDown(String contentId);
 
 }
