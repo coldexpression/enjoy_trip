@@ -19,4 +19,5 @@ public class AttractionInfo {
     private int readCount;
     private int likeCount;
     private String overview;
+    private String name;
 }

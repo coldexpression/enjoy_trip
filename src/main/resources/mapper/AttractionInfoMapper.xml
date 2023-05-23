@@ -151,7 +151,6 @@
         delete from favorite where user_id = #{userId} and content_id = #{contentId};
     </delete>
     <select id="userFavoriteList" resultType="AttractionInfo" parameterType="String">
-        use enjoy;
         select ai.content_id   contentId,
                ai.title        title,
                ai.addr1        addr1,
@@ -173,6 +172,6 @@
              favorite f
              on
                  f.content_id = ai.content_id
-        where ai.content_id in (select content_id from favorite where user_id=#{userId})
+        where ai.content_id in (select content_id from favorite where user_id=#{userId}) and f.user_id=#{userId}
     </select>
 </mapper>
