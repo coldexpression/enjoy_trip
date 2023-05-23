@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.enjoytrip.model.mapper.BoardMapper">
+    <select id="selectAll" resultType="Board">
+        select b.num num,
+            b.user_id  userId,
+               b.title title,
+               b.content content,
+               b.readCount readCount
+        from board b
+            limit 100
+    </select>
+
+    <select id="selectByTitle" parameterType="java.lang.String" resultType="Board">
+        select b.num num,
+            b.user_id  userId,
+               b.title title,
+               b.content content,
+               b.readCount readCount
+        from board b
+        WHERE
+            title LIKE CONCAT('%'
+            , #{search_title}
+            , '%')
+            limit 100
+    </select>
+    <select id="selectByUserID" parameterType="java.lang.String" resultType="Board">
+        select b.num num,
+            b.user_id  userID,
+               b.title title,
+               b.content content,
+               b.readCount readCount
+        from board b
+        WHERE
+            b.user_id = #{userID}
+        limit 100
+    </select>
+    <update id="readCountUp" parameterType="java.lang.Integer">
+        update board
+        set readcount = readcount + 1
+        WHERE num = #{num};
+
+    </update>
+    <insert id="BoardInsert" parameterType="Board">
+        insert into board (user_id, title, content, readcount, writeDate)
+        values (#{userID}, #{title}, #{content},0, now());
+    </insert>
+    <delete id="BoardDelete" parameterType="java.lang.Integer">
+        delete
+        from board
+        where num = #{num};
+    </delete>
+</mapper>
