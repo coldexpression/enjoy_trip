@@ -30,9 +30,11 @@ public class BoardServiceImpl implements BoardService {
     public List<Board> selectByUserID(String userID) {
         return boardMapper.selectByUserID(userID);
     }
+
     @Override
-    public void readCountUp(Integer num){
+    public Board selectByNum(int num){
         boardMapper.readCountUp(num);
+        return boardMapper.selectByNum(num);
     }
 
     public boolean BoardInsert(Board boardInfo){

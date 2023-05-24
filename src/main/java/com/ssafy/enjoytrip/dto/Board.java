@@ -10,4 +10,5 @@ public class Board {
     private String title;
     private String content;
     private int readCount;
+    private String writeDate;
 }

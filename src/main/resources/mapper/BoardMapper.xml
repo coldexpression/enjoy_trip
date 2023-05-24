@@ -8,7 +8,8 @@
             b.user_id  userId,
                b.title title,
                b.content content,
-               b.readCount readCount
+               b.readCount readCount,
+                b.writeDate writeDate
         from board b
             limit 100
     </select>
@@ -18,7 +19,8 @@
             b.user_id  userId,
                b.title title,
                b.content content,
-               b.readCount readCount
+               b.readCount readCount,
+               b.writeDate writeDate
         from board b
         WHERE
             title LIKE CONCAT('%'
@@ -31,7 +33,8 @@
             b.user_id  userID,
                b.title title,
                b.content content,
-               b.readCount readCount
+               b.readCount readCount,
+               b.writeDate writeDate
         from board b
         WHERE
             b.user_id = #{userID}
@@ -45,11 +48,22 @@
     </update>
     <insert id="BoardInsert" parameterType="Board">
         insert into board (user_id, title, content, readcount, writeDate)
-        values (#{userID}, #{title}, #{content},0, now());
+        values (#{userID}, #{title}, #{content},0, CURDATE() );
     </insert>
     <delete id="BoardDelete" parameterType="java.lang.Integer">
         delete
         from board
         where num = #{num};
     </delete>
+    <select id="selectByNum" parameterType="java.lang.Integer" resultType="Board">
+        select b.num num,
+               b.user_id  userId,
+               b.title title,
+               b.content content,
+               b.readCount readCount,
+               b.writeDate writeDate
+        from board b
+        WHERE b.num = #{num}
+            limit 100
+    </select>
 </mapper>

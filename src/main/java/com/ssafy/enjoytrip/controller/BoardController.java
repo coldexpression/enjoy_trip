@@ -35,6 +35,12 @@ public class BoardController {
         return new ResponseEntity<>(boardService.selectByUserID(userID), HttpStatus.OK);
     }
 
+    @GetMapping("/page/{num}")
+    public ResponseEntity<Board> selectByNum(@PathVariable int num){
+        System.out.println(num);
+        return new ResponseEntity<>(boardService.selectByNum(num), HttpStatus.OK);
+    }
+
     @PostMapping({"/regist"})
     public ResponseEntity<Boolean> BoardInsert(@RequestBody Board board){
         return new ResponseEntity<>(boardService.BoardInsert(board), HttpStatus.OK);

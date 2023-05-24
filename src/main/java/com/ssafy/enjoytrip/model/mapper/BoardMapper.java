@@ -19,4 +19,5 @@ public interface BoardMapper {
     boolean BoardInsert(Board boardInfo);
 
     boolean BoardDelete(int num);
+    Board selectByNum(int num);
 }

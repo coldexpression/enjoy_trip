@@ -12,7 +12,7 @@ public interface BoardService {
 
     List<Board> selectByUserID(String userID);
 
-    void readCountUp(Integer num);
+    Board selectByNum(int num);
 
     boolean BoardInsert(Board boardInfo);
     boolean BoardDelete(int num);
