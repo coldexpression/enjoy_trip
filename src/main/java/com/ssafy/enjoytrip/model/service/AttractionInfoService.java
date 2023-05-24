@@ -11,7 +11,8 @@ public interface AttractionInfoService {
 
     List<AttractionInfo> selectByTitle(String search_title);
 
-    List<AttractionInfo> selectBySidoCode(String sido_code);
+    List<AttractionInfo> selectBySidoCode(String sidoCode, int currentPage, int perPage);
+    Integer selectBySidoCodeCount(String sidoCode);
 
     AttractionInfo selectByContentID(String contentId);
 
