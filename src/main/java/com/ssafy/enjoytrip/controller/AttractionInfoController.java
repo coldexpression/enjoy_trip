@@ -34,10 +34,17 @@ public class AttractionInfoController {
         return new ResponseEntity<>(attractionInfoService.selectByTitle(searchTitle), HttpStatus.OK);
     }
 
-    @GetMapping("/list/{sidoCode}")
-    public ResponseEntity<List<AttractionInfo>> selectBySidoCode(@PathVariable String sidoCode) {
+    @GetMapping("/list/{sidoCode}/count")
+    public ResponseEntity<Integer> selectBySidoCodeCount(@PathVariable String sidoCode) {
         System.out.println(sidoCode);
-        return new ResponseEntity<>(attractionInfoService.selectBySidoCode(sidoCode), HttpStatus.OK);
+        return new ResponseEntity<>(attractionInfoService.selectBySidoCodeCount(sidoCode), HttpStatus.OK);
+    }
+
+    @GetMapping("/list/{sidoCode}")
+    public ResponseEntity<List<AttractionInfo>> selectBySidoCode(@PathVariable(name = "sidoCode") String sidoCode,
+                                                                 @RequestParam(defaultValue = "0", name = "currentPage") int currentPage,
+                                                                 @RequestParam(defaultValue = "999", name="perPage") int perPage) {
+        return new ResponseEntity<>(attractionInfoService.selectBySidoCode(sidoCode, currentPage, perPage), HttpStatus.OK);
     }
 
     @GetMapping("/{contentId}")

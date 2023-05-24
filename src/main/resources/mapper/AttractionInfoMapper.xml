@@ -82,7 +82,7 @@
             addr1 LIKE CONCAT('%',#{searchTitle},'%')
             limit 100
     </select>
-    <select id="selectBySidoCode" parameterType="java.lang.String" resultType="AttractionInfo">
+    <select id="selectBySidoCode" parameterType="map" resultType="AttractionInfo">
         select
             ai.content_id contentId,
             ai.title title,
@@ -102,9 +102,23 @@
             on
                 ad.content_id = ai.content_id
         WHERE
-            ai.sido_code = #{sido_code}
-            limit 100
+            ai.sido_code = #{sidoCode}
+            limit #{currentPage}, #{perPage}
     </select>
+
+    <select id="selectBySidoCodeCount" parameterType="map" resultType="java.lang.Integer">
+        select
+            count(*)
+        from
+            attraction_description ad
+                inner join
+            attraction_info ai
+            on
+                ad.content_id = ai.content_id
+        WHERE
+            ai.sido_code = #{sidoCode}
+    </select>
+
     <select id="selectByContentID" parameterType="java.lang.String" resultType="AttractionInfo">
         select
             ai.content_id contentId,

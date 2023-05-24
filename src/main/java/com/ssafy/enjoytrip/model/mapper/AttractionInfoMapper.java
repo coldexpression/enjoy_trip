@@ -2,6 +2,7 @@ package com.ssafy.enjoytrip.model.mapper;
 
 import com.ssafy.enjoytrip.dto.AttractionInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,9 @@ public interface AttractionInfoMapper {
 
     List<AttractionInfo> selectByTitle(String searchTitle);
 
-    List<AttractionInfo> selectBySidoCode(String sidoCode);
+    List<AttractionInfo> selectBySidoCode(@Param("sidoCode") String sidoCode, @Param("currentPage") int currentPage, @Param("perPage") int perPage);
+
+    Integer selectBySidoCodeCount(String sidoCode);
 
     AttractionInfo selectByContentID(String contentId);
 

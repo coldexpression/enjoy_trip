@@ -35,8 +35,13 @@ public class AttractionInfoServiceImpl implements AttractionInfoService {
     }
 
     @Override
-    public List<AttractionInfo> selectBySidoCode(String sido_code) {
-        return attractionInfoMapper.selectBySidoCode(sido_code);
+    public List<AttractionInfo> selectBySidoCode(String sidoCode, int currentPage, int perPage) {
+        return attractionInfoMapper.selectBySidoCode(sidoCode, currentPage <= 1 ? 0 : currentPage * perPage, perPage);
+    }
+
+    @Override
+    public Integer selectBySidoCodeCount(String sidoCode) {
+        return attractionInfoMapper.selectBySidoCodeCount(sidoCode);
     }
 
     @Override
