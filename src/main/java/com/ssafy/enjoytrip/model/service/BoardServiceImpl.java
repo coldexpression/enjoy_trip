@@ -1,8 +1,10 @@
 package com.ssafy.enjoytrip.model.service;
 
 import com.ssafy.enjoytrip.dto.Board;
+import com.ssafy.enjoytrip.dto.User;
 import com.ssafy.enjoytrip.model.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -38,6 +40,11 @@ public class BoardServiceImpl implements BoardService {
     }
 
     public boolean BoardInsert(Board boardInfo){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userInfo = (User)principal;
+        String userId = userInfo.getId();
+        boardInfo.setUserID(userId);
+
         return boardMapper.BoardInsert(boardInfo);
     }
     public boolean BoardDelete(int num){

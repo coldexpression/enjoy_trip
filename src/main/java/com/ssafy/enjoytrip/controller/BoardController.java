@@ -46,8 +46,8 @@ public class BoardController {
         return new ResponseEntity<>(boardService.BoardInsert(board), HttpStatus.OK);
     }
 
-    @PostMapping("/delete")
-    public ResponseEntity<Boolean> BoardDelete(@RequestParam int num){
+    @DeleteMapping("/delete/{num}")
+    public ResponseEntity<Boolean> BoardDelete(@PathVariable int num){
         System.out.println(num);
         return new ResponseEntity<>(boardService.BoardDelete(num),HttpStatus.OK);
     }
